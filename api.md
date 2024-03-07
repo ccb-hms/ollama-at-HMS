@@ -157,7 +157,7 @@ If `stream` is set to `false`, the response will be a single JSON object:
 
 ```shell
 curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
-  "model": "llama2",
+  "model": "nomic-embed-text",
   "prompt": "What color is the sky at different times of the day? Respond using JSON",
   "format": "json",
   "stream": false
