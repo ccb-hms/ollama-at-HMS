@@ -1,5 +1,7 @@
 # API
 
+# REMINDER: The endpoint is only available on the HMS network, connect on campus or via VPN
+
 ## Endpoints
 
 - [Generate a completion](#generate-a-completion)
@@ -65,7 +67,7 @@ Enable JSON mode by setting the `format` parameter to `json`. This will structur
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "llama2",
   "prompt": "Why is the sky blue?"
 }'
@@ -120,7 +122,7 @@ To calculate how fast the response is generated in tokens per second (token/s), 
 A response can be received in one reply when streaming is off.
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "llama2",
   "prompt": "Why is the sky blue?",
   "stream": false
@@ -154,7 +156,7 @@ If `stream` is set to `false`, the response will be a single JSON object:
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "llama2",
   "prompt": "What color is the sky at different times of the day? Respond using JSON",
   "format": "json",
@@ -206,7 +208,7 @@ To submit images to multimodal models such as `llava` or `bakllava`, provide a l
 #### Request
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "llava",
   "prompt":"What is in this picture?",
   "stream": false,
@@ -239,7 +241,7 @@ In some cases, you may wish to bypass the templating system and provide a full p
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "mistral",
   "prompt": "[INST] why is the sky blue? [/INST]",
   "raw": true,
@@ -254,7 +256,7 @@ For reproducible outputs, set `temperature` to 0 and `seed` to a number:
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "mistral",
   "prompt": "Why is the sky blue?",
   "options": {
@@ -288,7 +290,7 @@ If you want to set custom options for the model at runtime rather than in the Mo
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "llama2",
   "prompt": "Why is the sky blue?",
   "stream": false,
@@ -353,7 +355,7 @@ If an empty prompt is provided, the model will be loaded into memory.
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/generate -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/generate -d '{
   "model": "llama2"
 }'
 ```
@@ -407,7 +409,7 @@ Advanced parameters (optional):
 Send a chat message with a streaming response.
 
 ```shell
-curl http://localhost:11434/api/chat -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/chat -d '{
   "model": "llama2",
   "messages": [
     {
@@ -456,7 +458,7 @@ Final response:
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/chat -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/chat -d '{
   "model": "llama2",
   "messages": [
     {
@@ -495,7 +497,7 @@ Send a chat message with a conversation history. You can use this same approach 
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/chat -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/chat -d '{
   "model": "llama2",
   "messages": [
     {
@@ -553,7 +555,7 @@ Final response:
 Send a chat message with a conversation history.
 
 ```shell
-curl http://localhost:11434/api/chat -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/chat -d '{
   "model": "llava",
   "messages": [
     {
@@ -591,7 +593,7 @@ curl http://localhost:11434/api/chat -d '{
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/chat -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/chat -d '{
   "model": "llama2",
   "messages": [
     {
@@ -650,7 +652,7 @@ Create a new model from a `Modelfile`.
 ##### Request
 
 ```shell
-curl http://localhost:11434/api/create -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/create -d '{
   "name": "mario",
   "modelfile": "FROM llama2\nSYSTEM You are mario from Super Mario Bros."
 }'
@@ -691,7 +693,7 @@ Ensures that the file blob used for a FROM or ADAPTER field exists on the server
 ##### Request
 
 ```shell
-curl -I http://localhost:11434/api/blobs/sha256:29fdb92e57cf0827ded04ae6461b5931d01fa595843f55d36f5b275a52087dd2
+curl -I http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/blobs/sha256:29fdb92e57cf0827ded04ae6461b5931d01fa595843f55d36f5b275a52087dd2
 ```
 
 ##### Response
@@ -715,7 +717,7 @@ Create a blob from a file on the server. Returns the server file path.
 ##### Request
 
 ```shell
-curl -T model.bin -X POST http://localhost:11434/api/blobs/sha256:29fdb92e57cf0827ded04ae6461b5931d01fa595843f55d36f5b275a52087dd2
+curl -T model.bin -X POST http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/blobs/sha256:29fdb92e57cf0827ded04ae6461b5931d01fa595843f55d36f5b275a52087dd2
 ```
 
 ##### Response
@@ -735,7 +737,7 @@ List models that are available locally.
 #### Request
 
 ```shell
-curl http://localhost:11434/api/tags
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/tags
 ```
 
 #### Response
@@ -792,7 +794,7 @@ Show information about a model including details, modelfile, template, parameter
 #### Request
 
 ```shell
-curl http://localhost:11434/api/show -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/show -d '{
   "name": "llama2"
 }'
 ```
@@ -827,7 +829,7 @@ Copy a model. Creates a model with another name from an existing model.
 #### Request
 
 ```shell
-curl http://localhost:11434/api/copy -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/copy -d '{
   "source": "llama2",
   "destination": "llama2-backup"
 }'
@@ -854,7 +856,7 @@ Delete a model and its data.
 #### Request
 
 ```shell
-curl -X DELETE http://localhost:11434/api/delete -d '{
+curl -X DELETE http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/delete -d '{
   "name": "llama2:13b"
 }'
 ```
@@ -882,7 +884,7 @@ Download a model from the ollama library. Cancelled pulls are resumed from where
 #### Request
 
 ```shell
-curl http://localhost:11434/api/pull -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/pull -d '{
   "name": "llama2"
 }'
 ```
@@ -954,7 +956,7 @@ Upload a model to a model library. Requires registering for ollama.ai and adding
 #### Request
 
 ```shell
-curl http://localhost:11434/api/push -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/push -d '{
   "name": "mattw/pygmalion:latest"
 }'
 ```
@@ -1023,7 +1025,7 @@ Advanced parameters:
 #### Request
 
 ```shell
-curl http://localhost:11434/api/embeddings -d '{
+curl http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434/api/embeddings -d '{
   "model": "llama2",
   "prompt": "Here is an article about llamas..."
 }'
