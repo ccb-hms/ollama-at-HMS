@@ -7,12 +7,12 @@ Documentation, scripts, tutorials, presentations, wikis, etc. that relate to run
 
 ## What is going on?
 
-Right now, there is a running job on our dedicated GPU node that runs [Ollama](https://github.com/ollama/ollama) - a popular and open-source Go project that runs and serves LLM models. We can therefore use this node as an endpoint for LLM applications:
+Right now, there is a running job on our dedicated GPU node that runs [Ollama](https://github.com/ollama/ollama) - a popular and open-source service that runs and serves LLM models locally. We can therefore use this node as an endpoint for LLM applications:
 
 ```bash
 http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434
 ```
-This is only accessible via the HMS network so you will need to connect directly to HMS internet or be on the VPN
+This is **only accessible via the HMS network** so you will need to connect directly to HMS internet or be on the VPN
 
 The endpoint has a RESTful API that can be queried using any language, including Python, JavaScript, Typescript, Go, Rust, and even R. Learn more about using the API in the **[API Documentation](./api.md)**.
 
@@ -22,7 +22,7 @@ For further details, see this [blogpost](https://eli.thegreenplace.net/2024/the-
 
 Ollama supports a list of models available on [ollama.com/library](https://ollama.com/library 'ollama model library'). See the API docs for how to make model pull requests.
 
-Create new models or modify models already in the library using the Modelfile. Learn more about the Modelfile syntax in the **[Modelfile Documentation](./modelfile.md)**.
+Create new models or modify models already in the library using the Modelfile. See the **[Modelfile Documentation](./modelfile.md)** or the instructions on **[import](./import.md)**.
 
 ## Is there a UI I can use to chat with the models?
 
@@ -43,5 +43,5 @@ Many libraries now integrate with ollama with wrappers that give it the same api
 At the moment the server is using 1 A100GPU and all requests are completed in serial. Multiple requests will be completed in the order recieved.
 
 
-
-<sub>*Citations*: most of these docs are shamelessly ripped off from the [ollama docs](https://github.com/ollama/ollama/tree/main/docs)</sub>
+#### Citations
+<sub> most of these docs are shamelessly ripped off from the [ollama docs](https://github.com/ollama/ollama/tree/main/docs)</sub>
