@@ -16,7 +16,7 @@ This is **only accessible via the HMS network** so you will need to connect dire
 
 The endpoint has a RESTful API that can be queried using any language, including Python, JavaScript, Typescript, Go, Rust, and even R. Learn more about using the API in the **[API Documentation](./api.md)**.
 
-For further details, see this [blogpost](https://eli.thegreenplace.net/2024/the-life-of-an-ollama-prompt/).
+For further details on how the backend of Ollama works, see this [blogpost](https://eli.thegreenplace.net/2024/the-life-of-an-ollama-prompt/).
 
 ## Can we run (some LLM Model) on O2?
 
