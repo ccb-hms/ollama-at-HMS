@@ -1,5 +1,13 @@
 # Using LangChain with Ollama in Python
 
+### Requirements
+- python/3.10.11
+
+### Python libraries to install in your vitrual environment
+- langchain
+- bs4
+- chromadb
+
 Let's imagine we are studying the classics, such as **the Odyssey** by **Homer**. We might have a question about Neleus and his family. If you ask llama2 for that info, you may get something like:
 
 > I apologize, but I'm a large language model, I cannot provide information on individuals or families that do not exist in reality. Neleus is not a real person or character, and therefore does not have a family or any other personal details. My apologies for any confusion. Is there anything else I can help you with?
@@ -10,6 +18,7 @@ This sounds like a typical censored response, but even llama2-uncensored gives a
 
 So let's figure out how we can use **LangChain** with Ollama to ask our question to the actual document, the Odyssey by Homer, using Python.
 
+
 Let's start by asking a simple question that we can get an answer to from the **Llama2** model using **Ollama**. First, we need to install the **LangChain** package:
 
 `pip install langchain`
@@ -18,12 +27,14 @@ Then we can create a model and ask the question:
 
 ```python
 from langchain.llms import Ollama
-ollama = Ollama(base_url='http://localhost:11434',
-model="llama2")
+
+ccb_endpoint = 'http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434'
+
+ollama = Ollama(base_url= ccb_endpoint, model="llama2")
 print(ollama("why is the sky blue"))
 ```
 
-Notice that we are defining the model and the base URL for Ollama.
+Notice that we are defining the model and the base URL for Ollama. The endpoint URL is 
 
 Now let's load a document to ask questions against. I'll load up the Odyssey by Homer, which you can find at Project Gutenberg. We will need **WebBaseLoader** which is part of **LangChain** and loads text from any webpage. On my machine, I also needed to install **bs4** to get that to work, so run `pip install bs4`.
 
@@ -33,7 +44,7 @@ loader = WebBaseLoader("https://www.gutenberg.org/files/1727/1727-h/1727-h.htm")
 data = loader.load()
 ```
 
-This file is pretty big. Just the preface is 3000 tokens. Which means the full document won't fit into the context for the model. So we need to split it up into smaller pieces.
+This file is pretty big. Just the preface is 3000 tokens. Which means the full document won't fit into the context for the model. One strategy is to pass a relevant subset (chunk) of your full data. There are many ways to chunk (split up) text. Langchain has a few [built in functions](https://python.langchain.com/docs/modules/data_connection/document_transformers/) for different text chunking strategies, a user might experiment to find the right size and overlap values for their document(s).
 
 ```python
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -47,7 +58,7 @@ It's split up, but we have to find the relevant splits and then submit those to 
 ```python
 from langchain.embeddings import OllamaEmbeddings
 from langchain.vectorstores import Chroma
-oembed = OllamaEmbeddings(base_url="http://localhost:11434", model="nomic-embed-text")
+oembed = OllamaEmbeddings(base_url=ccb_endpoint, model="nomic-embed-text")
 vectorstore = Chroma.from_documents(documents=all_splits, embedding=oembed)
 ```
 
