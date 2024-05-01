@@ -28,7 +28,7 @@ Then we can create a model and ask the question:
 ```python
 from langchain.llms import Ollama
 
-ccb_endpoint = 'http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434'
+ccb_endpoint = 'http://endpoint_url:11434'
 
 ollama = Ollama(base_url= ccb_endpoint, model="llama2")
 print(ollama("why is the sky blue"))

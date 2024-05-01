@@ -10,9 +10,14 @@ Documentation, scripts, tutorials, presentations, wikis, etc. that relate to run
 Right now, there is a running job on our dedicated GPU node that runs [Ollama](https://github.com/ollama/ollama) - a popular and open-source service that runs and serves LLM models locally. We can therefore use this node as an endpoint for LLM applications:
 
 ```bash
-http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434
+Request access by email <ccbhelp@hms.harvard.edu>
 ```
 This is **only accessible via the HMS network** so you will need to connect directly to HMS internet or be on the VPN
+
+If  installed locally, the ollama endpoint by default will be on localhost address. 
+```bash
+http://127.0.0.1:11434
+```
 
 The endpoint has a RESTful API that can be queried using any language, including Python, JavaScript, Typescript, Go, Rust, and even R. Learn more about using the API in the **[API Documentation](./api.md)**.
 
@@ -30,7 +35,7 @@ There is already a large collection of plugins available for VSCode as well as o
 
 For off-the-shelf UI options, you can use the [OpenWebUI](https://github.com/open-webui/open-webui) project which has a ready-built docker container that will interface with our ollama endpoint. If you can run docker on your local machine, simply run the following command:
   ```bash
-  docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://compute-gc-17-255.o2.rc.hms.harvard.edu:11434 -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+  docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=<endpoint URL>:11434 -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
   ```
 
 After the container builds and runs, you can access Open WebUI at [http://localhost:3000](http://localhost:3000). Sign up using any name and fake email and it will make you an admin.

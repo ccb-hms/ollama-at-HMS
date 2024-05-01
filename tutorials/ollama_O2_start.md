@@ -4,10 +4,10 @@
 This will try to demonstrate how to get ollama starting on a gpu node on O2. Currently HMSRC has built a singularity image in a shared directory meaning ollama can be setup in a compute node to leverage O2 HPC resources for serving LLM models. This tutorial will walk you through the steps needed to run this singulairty container. Note that once set up, it can only recieve API calls from within O2.
 
 
-1. allocate resources in a interactive node, we will use the `gpu_ccb` partition for this demo but you can run this on the regular `gpu` queue.
+1. allocate resources in a interactive node, this example will request a single GPU from the `gpu` partition queue and set up ollama to run inference on it.
 
 Request a node from SLUM
-`srun --account=gentleman_rcg7_contrib --pty -p interactive -t 0-01:00 --mem 16G -c 4 -p gpu_ccb --gres=gpu:1 /bin/bash`
+`srun --account=<YOURO2COSTACCOUNT> --pty -p interactive -t 0-01:00 --mem 16G -c 4 -p gpu --gres=gpu:1 /bin/bash`
 
 Once request is fufilled and in the node, load modules
 `module load gcc/9.2.0 cuda/12.1 python/3.10.11`
